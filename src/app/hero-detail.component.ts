@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
 import { Hero } from './hero';
@@ -12,7 +12,7 @@ import 'rxjs/add/operator/switchMap';
   templateUrl: './hero-detail.component.html'
 })
 export class HeroDetailComponent implements OnInit {
-  @Input() hero: Hero; // hero属性是一个输入属性
+  hero: Hero; // hero属性是一个输入属性
 
   constructor(
     private heroService: HeroService,
