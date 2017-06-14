@@ -10,7 +10,7 @@ export class HeroService {
 
   getHero(id: number): Promise<Hero> {
     return this.getHeroes()
-               .then(heroesFrom => heroesFrom.find(hero => hero.id === id));
+               .then(heroesFromService => heroesFromService.find(hero => hero.id === id));
   }
 
 //   getHeroesSlowly(): Promise<Hero[]> {

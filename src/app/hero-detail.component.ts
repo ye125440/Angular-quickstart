@@ -12,7 +12,7 @@ import 'rxjs/add/operator/switchMap';
   templateUrl: './hero-detail.component.html'
 })
 export class HeroDetailComponent implements OnInit {
-  hero: Hero; // hero属性是一个输入属性
+  hero: Hero;
 
   constructor(
     private heroService: HeroService,

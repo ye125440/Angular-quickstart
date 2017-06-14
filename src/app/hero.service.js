@@ -15,7 +15,7 @@ var HeroService = (function () {
     };
     HeroService.prototype.getHero = function (id) {
         return this.getHeroes()
-            .then(function (heroesFrom) { return heroesFrom.find(function (hero) { return hero.id === id; }); });
+            .then(function (heroesFromService) { return heroesFromService.find(function (hero) { return hero.id === id; }); });
     };
     return HeroService;
 }());
