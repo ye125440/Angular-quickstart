@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
   // 所有组件都可以使用它 Angular 会把 HeroService 注入到 DashboardComponent
   constructor(private HeroService: HeroService) {}
 
+  // 实现生命周期钩子来完成 heroes 初始化 得到第2、3、4、5位英雄
   ngOnInit(): void {
     this.HeroService.getHeroes()
       .then(heroesFromService => this.heroes = heroesFromService.slice(1, 5));

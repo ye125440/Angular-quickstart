@@ -18,6 +18,7 @@ var DashboardComponent = (function () {
         this.HeroService = HeroService;
         this.heroes = [];
     }
+    // 实现生命周期钩子来完成 heroes 初始化 得到第2、3、4、5位英雄
     DashboardComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.HeroService.getHeroes()
