@@ -35,4 +35,25 @@ export class HeroesComponent implements OnInit {
   gotoDetail(): void {
     this.router.navigate(['/detail', this.selectedHero.id]);
   }
+
+  delete(hero: Hero): void {
+    this.heroService
+      .delete(hero.id)
+      .then(() => {
+        // filter方法的参数是一个函数，所有数组成员依次执行该函数，
+        // 返回结果为true的成员组成一个新数组返回。
+        this.heroes = this.heroes.filter(h => h !== hero);
+        if (this.selectedHero === hero) { this.selectedHero = null; }
+      });
+  }
+
+  add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.heroService.create(name)
+      .then(hero => {
+        this.heroes.push(hero);
+        this.selectedHero = null;
+      });
+  }
 }

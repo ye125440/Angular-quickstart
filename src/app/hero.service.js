@@ -8,7 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 require("rxjs/add/operator/toPromise");
@@ -26,7 +25,7 @@ var HeroService = (function () {
             .catch(this.handleError);
     };
     HeroService.prototype.handleError = function (error) {
-        console.error('An error occured', error); // for demo only
+        console.error('An error occurred', error); // for demo only
         return Promise.reject(error.message || error);
     };
     HeroService.prototype.getHero = function (id) {
@@ -36,12 +35,28 @@ var HeroService = (function () {
             .then(function (response) { return response.json().data; })
             .catch(this.handleError);
     };
+    // update()方法的大致结构与getHeroes()类似，不过我们使用 HTTP 的 put() 方法来把修改持久化到服务端：
     HeroService.prototype.update = function (hero) {
         var url = this.heroesUrl + "/" + hero.id;
         return this.http
             .put(url, JSON.stringify(hero), { headers: this.headers })
             .toPromise()
             .then(function () { return hero; })
+            .catch(this.handleError);
+    };
+    // hero 服务的delete()方法使用 HTTP 的 delete() 方法来从服务器上移除该英雄：
+    HeroService.prototype.delete = function (id) {
+        var url = this.heroesUrl + "/" + id;
+        return this.http.delete(url, { headers: this.headers })
+            .toPromise()
+            .then(function () { return null; })
+            .catch(this.handleError);
+    };
+    HeroService.prototype.create = function (name) {
+        return this.http
+            .post(this.heroesUrl, JSON.stringify({ name: name }), { headers: this.headers })
+            .toPromise()
+            .then(function (res) { return res.json().data; })
             .catch(this.handleError);
     };
     return HeroService;

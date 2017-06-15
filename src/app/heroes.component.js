@@ -30,6 +30,31 @@ var HeroesComponent = (function () {
     HeroesComponent.prototype.gotoDetail = function () {
         this.router.navigate(['/detail', this.selectedHero.id]);
     };
+    HeroesComponent.prototype.delete = function (hero) {
+        var _this = this;
+        this.heroService
+            .delete(hero.id)
+            .then(function () {
+            // filter方法的参数是一个函数，所有数组成员依次执行该函数，
+            // 返回结果为true的成员组成一个新数组返回。
+            _this.heroes = _this.heroes.filter(function (h) { return h !== hero; });
+            if (_this.selectedHero === hero) {
+                _this.selectedHero = null;
+            }
+        });
+    };
+    HeroesComponent.prototype.add = function (name) {
+        var _this = this;
+        name = name.trim();
+        if (!name) {
+            return;
+        }
+        this.heroService.create(name)
+            .then(function (hero) {
+            _this.heroes.push(hero);
+            _this.selectedHero = null;
+        });
+    };
     return HeroesComponent;
 }());
 HeroesComponent = __decorate([
